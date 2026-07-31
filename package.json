@@ -1,0 +1,31 @@
+{
+  "name": "vericall",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "VeriCall MVP — software-only simulation proving a video-call participant is a real, live human using real cryptography. Google Meet Chrome extension. Demo-grade, NOT hardware-secure.",
+  "scripts": {
+    "build": "node build.mjs",
+    "build:watch": "node build.mjs --watch",
+    "server": "tsx server/index.ts",
+    "start": "tsx server/index.ts",
+    "test": "node --import tsx --test core/__tests__/*.test.ts",
+    "test:relay": "node --import tsx --test server/relay.test.ts",
+    "test:dom": "node --import tsx --test --test-force-exit adapters/meet/meet.test.ts",
+    "test:all": "npm run test && npm run test:relay && npm run test:dom",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.268",
+    "@types/jsdom": "^28.0.3",
+    "@types/node": "^22.10.0",
+    "@types/ws": "^8.5.13",
+    "esbuild": "^0.24.0",
+    "jsdom": "^29.1.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

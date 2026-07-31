@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="popup.css" />
+    <title>VeriCall</title>
+  </head>
+  <body>
+    <header class="vc-head">
+      <div class="vc-logo">🛡️ VeriCall</div>
+      <div class="vc-sub">Live human verification for Google Meet</div>
+    </header>
+
+    <main>
+      <section id="notMeet" class="vc-note vc-hidden">
+        Open a <b>meet.google.com</b> call tab, then reopen this popup.
+      </section>
+
+      <section id="controls">
+        <label class="vc-field">
+          <span>Session code</span>
+          <div class="vc-row">
+            <input id="session" type="text" placeholder="e.g. otter-blue-42"
+                   autocomplete="off" spellcheck="false" />
+            <button id="dice" class="vc-icon-btn" title="Generate a code">🎲</button>
+          </div>
+        </label>
+        <p class="vc-hint">
+          Share this code with the other participant out-of-band (like a Meet
+          link). Both of you enter the <b>same</b> code.
+        </p>
+
+        <div class="vc-row">
+          <button id="start" class="vc-primary">Start verifying</button>
+          <button id="stop" class="vc-ghost vc-hidden">Stop</button>
+        </div>
+      </section>
+
+      <section id="status" class="vc-status vc-hidden">
+        <div class="vc-status-line">
+          <span class="vc-dot" id="connDot"></span>
+          <span id="connText">Connecting…</span>
+        </div>
+        <div class="vc-your-key">Your key: <code id="fpr">—</code></div>
+        <ul id="participants" class="vc-participants"></ul>
+        <div id="empty" class="vc-empty">Waiting for the other participant to join the session…</div>
+
+        <details id="diag" class="vc-diag">
+          <summary>Diagnostics (rehearsal)</summary>
+          <div class="vc-diag-grid">
+            <span>Remote tiles found</span><b id="dTiles">—</b>
+            <span>Local video source</span><b id="dStream">—</b>
+            <span>Frames sent</span><b id="dSent">—</b>
+            <span>Sigs verified</span><b id="dVerified">—</b>
+          </div>
+          <div id="dNote" class="vc-diag-note"></div>
+        </details>
+      </section>
+
+      <section id="tamper" class="vc-tamper vc-hidden">
+        <div class="vc-tamper-title">Demo control</div>
+        <p class="vc-hint">
+          Break your own signing to prove the other side notices. Their badge
+          flips red within a couple of seconds.
+        </p>
+        <button id="tamperBtn" class="vc-danger">⚠️ Simulate tampering</button>
+        <button id="restoreBtn" class="vc-ghost vc-hidden">✓ Restore honest signing</button>
+        <div id="tamperState" class="vc-tamper-state"></div>
+      </section>
+    </main>
+
+    <footer class="vc-foot">
+      Demo-grade. Real cryptography, but the key lives in browser memory — not
+      hardware. It does <b>not</b> protect against a compromised computer.
+    </footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+# Fly.io config for the VeriCall relay.
+# Deploy from the repo root:
+#   fly launch --no-deploy --dockerfile server/Dockerfile --config server/fly.toml
+#   fly deploy --dockerfile server/Dockerfile --config server/fly.toml
+# Then your relay is at wss://<app-name>.fly.dev
+app = "vericall-relay"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+  VERICALL_MAX_PER_SESSION = "2"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "suspend"
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[http_service.checks]]
+    method = "GET"
+    path = "/health"
+    interval = "15s"
+    timeout = "2s"

@@ -1,0 +1,14 @@
+# Render.com blueprint for the VeriCall relay.
+# Push this repo to GitHub, then in Render: New → Blueprint → pick the repo.
+# Render injects PORT automatically and gives you a wss:// URL.
+services:
+  - type: web
+    name: vericall-relay
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: VERICALL_MAX_PER_SESSION
+        value: "2"

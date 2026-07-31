@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "VeriCall — Live Human Verification (Demo)",
+  "version": "0.1.0",
+  "description": "Demo-grade proof that a Google Meet participant is a real, live human using real cryptographic signatures. NOT hardware-secure.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://meet.google.com/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "VeriCall",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://meet.google.com/*"],
+      "js": ["contentScript.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
